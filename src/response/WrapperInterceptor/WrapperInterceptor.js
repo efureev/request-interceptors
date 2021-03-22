@@ -25,27 +25,31 @@ const successHandler = (ResponseWrapperConfig) => (response) => {
   return new ResponseWrapper(response, ResponseWrapperConfig)
 }
 
+// @todo rewrite this block
 const BuildWrapperInterceptor = (ResponseWrapperConfig) => {
   //console.log('WrapperInterceptor: WrapperInterceptorConfig', ResponseWrapperConfig)
 
   return (layerConfig) => {
     //console.log('WrapperInterceptor: config', layerConfig)
     return [
-      successHandler(ResponseWrapperConfig),
+      (response) => {
+        // const config = merge({}, ResponseWrapperConfig, layerConfig)
+        return new ResponseWrapper(response, layerConfig.extra.withoutDataBlock ? { dataKey: '' } : null)
+      },
       errHandler,
     ]
   }
 }
 
-const WrapperInterceptor = (layerConfig) => {
-  //console.log('WrapperInterceptor: config', layerConfig)
+const WrapperInterceptor = () => {
   return (layerConfig) => [
-    successHandler(),
+    (response) => new ResponseWrapper(response, layerConfig.extra.withoutDataBlock ? { dataKey: '' } : null),
     errHandler,
   ]
 }
 
 export default WrapperInterceptor
+
 export {
   BuildWrapperInterceptor,
 }

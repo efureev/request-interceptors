@@ -12,7 +12,7 @@ import defaultConfig from './default'
 export default class ResponseWrapper {
   constructor(response, config) {
     this.type = 'mixed'
-    this.config = merge(defaultConfig, config)
+    this.config = merge({}, defaultConfig, config)
 
     this.datas = {
       data: null,
