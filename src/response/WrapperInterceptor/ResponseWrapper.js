@@ -1,23 +1,25 @@
 import { forEach } from '@feugene/mu/src'
 import { select } from '@feugene/mu/src/object'
 import { isArray, isBlob, isEmpty, isObject, isString } from '@feugene/mu/src/is'
+import merge from '@feugene/mu/src/object/merge'
+import defaultConfig from './default'
 
 /**
  * Create instance, which represent response object
- * @param {Object} axiosResponse Axios Response
- * @param {Object} options = {dataKey:'data'}
+ * @param {Object} response Axios Response
+ * @param {Object} config
  */
 export default class ResponseWrapper {
-  constructor(axiosResponse, options = { dataKey: 'data', statusKey: 'status' }) {
+  constructor(response, config) {
     this.type = 'mixed'
-    this.options = { ...options }
+    this.config = merge(defaultConfig, config)
 
     this.datas = {
       data: null,
       extra: {},
     }
 
-    this.setResponse(axiosResponse)
+    this.setResponse(response)
   }
 
   setResponse(response) {
@@ -32,6 +34,13 @@ export default class ResponseWrapper {
     return this
   }
 
+  dataKeyName() {
+    if (this.config.root) {
+      return ''
+    }
+    return !isEmpty(this.config.dataKey) ? this.config.dataKey : ''
+  }
+
   setData() {
     if (isString(this.response.data)) {
       this.datas.data = this.response.data
@@ -39,7 +48,8 @@ export default class ResponseWrapper {
       return
     }
 
-    const data = !isEmpty(this.options.dataKey) ? this.response.data[this.options.dataKey] : this.response.data
+    const dk = this.dataKeyName()
+    const data = !isEmpty(dk) ? this.response.data[dk] : this.response.data
 
     if (isObject(data)) {
       this.datas.data = { ...data }
@@ -52,7 +62,7 @@ export default class ResponseWrapper {
       this.type = 'blob'
     } else {
       this.datas.data = data
-      if (isEmpty(this.options.dataKey)) {
+      if (isEmpty(dk)) {
         this.type = 'content'
       } else {
         this.type = 'mixed'
@@ -63,9 +73,10 @@ export default class ResponseWrapper {
   }
 
   setExtraData() {
-    if (this.options.dataKey) {
+    const dk = this.dataKeyName()
+    if (dk) {
       forEach(this.response.data, (value, key) => {
-        if (key !== this.options.dataKey && key !== 'message') {
+        if (key !== dk && key !== 'message') {
           this.datas.extra[key] = value
         }
       })
