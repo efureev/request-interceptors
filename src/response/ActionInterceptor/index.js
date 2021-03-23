@@ -13,7 +13,7 @@ const ActionInterceptor = (options) =>
       : { type: 'blob' },
     )
 
-    if (action){
+    if (action) {
       action.run(options, response)
       throw new axios.Cancel({
         action,
@@ -23,4 +23,31 @@ const ActionInterceptor = (options) =>
     return response
   }
 
+const defaultInterceptorConfig = () => ({
+  actionAttributeName: 'status',
+})
+
+const ActionInterceptorBuild = (interceptorConfig = defaultInterceptorConfig()) => (options) =>
+  /**
+   * @param {ResponseWrapper} response
+   * @return {ResponseWrapper}
+   */
+    (response) => {
+    const action = buildAction(!response.isBinary()
+      ? response.extra(interceptorConfig.actionAttributeName)
+      : { type: 'blob' },
+    )
+
+    if (action) {
+      action.run(options, response)
+      throw new axios.Cancel(action)
+    }
+
+    return response
+  }
+
 export default ActionInterceptor
+
+export {
+  ActionInterceptorBuild,
+}
