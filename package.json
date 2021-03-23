@@ -1,7 +1,7 @@
 {
   "name": "@feugene/request-interceptors",
-  "version": "0.0.4",
-  "description": "Interceptors for axioss",
+  "version": "0.0.5",
+  "description": "Interceptors for axios",
   "main": "dist/index.js",
   "keywords": [
     "request"
@@ -28,14 +28,14 @@
     "esm": "3.2.25",
     "mocha": "^8.3.2",
     "prettier": "^2.2.1",
-    "@feugene/layer-request": "^0.0.7"
+    "@feugene/layer-request": "^0.1.0"
   },
   "dependencies": {
     "@feugene/mu": "^2.21.0",
     "axios": "^0.21.1"
   },
   "peerDependencies": {
-    "@feugene/layer-request": "^0.0.7"
+    "@feugene/layer-request": "^0.1.0"
   },
   "typings": "./index.d.ts"
 }

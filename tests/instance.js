@@ -1,4 +1,3 @@
-// import('@babel/register');
 import '@babel/polyfill'
 
 import assert from 'assert'
@@ -29,12 +28,15 @@ describe('create Request with interceptoprs', () => {
 
     const l = r.manager.getLayer('api')
 
-    l.runRequestInterceptors = []
+
 
     assert.strictEqual(3, l.interceptors.request.length)
     assert.strictEqual(0, l.interceptors.response.length)
 
     const buildReq = r.build('api')
+    // console.log(buildReq.wrapper.selectConfig)
+    buildReq.wrapper.selectConfig.requestConfig.runRequestInterceptors = []
+
     assert.strictEqual(3, buildReq.interceptors.request.handlers.length)
 
     const response = await buildReq.get('users/2')
@@ -47,7 +49,7 @@ describe('create Request with interceptoprs', () => {
     assert.strictEqual(true, isObject(response.config))
 
     forEach(['RequestConsoleInterceptor', 'RequestConsoleInterceptor 2', 'RequestConsoleInterceptor 3'], v => {
-      assert.strictEqual(true, l.runRequestInterceptors.includes(v))
+      assert.strictEqual(true, buildReq.wrapper.selectConfig.requestConfig.runRequestInterceptors.includes(v))
     })
   })
 

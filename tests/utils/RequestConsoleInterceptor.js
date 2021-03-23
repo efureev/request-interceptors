@@ -1,6 +1,6 @@
 const RequestConsoleInterceptor = (options) =>
   (config) => {
-    options.runRequestInterceptors.push('RequestConsoleInterceptor')
+    options.requestConfig.runRequestInterceptors.push('RequestConsoleInterceptor')
 
     console.log('run RequestConsoleInterceptor')
     return config

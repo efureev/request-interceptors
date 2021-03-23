@@ -1,5 +1,5 @@
 const defaultConfig = {
-  root: false,
+  // root: false,
   dataKey: 'data',
 }
 

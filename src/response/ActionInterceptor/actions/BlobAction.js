@@ -23,7 +23,7 @@ export default class BlobAction extends BaseAction {
 
     const reader = new FileReader()
 
-    reader.onloadend = function () {
+    reader.onloadend = function() {
       let url = reader.result
       url = url.replace(/^data:[^;]*;/, 'data:attachment/file;')
 
@@ -42,7 +42,7 @@ export default class BlobAction extends BaseAction {
     reader.readAsDataURL(
       new Blob([response.data], {
         type: response.data.type || 'application/octet-stream',
-      })
+      }),
     )
   }
 }
