@@ -16,7 +16,7 @@ describe('create Request with interceptoprs', () => {
 
     const layoutApi = r.manager.addLayer((cm) => cm.new({
       requestConfig: {
-        baseURL: 'https://reqres.in/api',
+        baseURL: 'https://mockery.dev/api/v1',
         timeout: 30000,
       },
       interceptors: {
@@ -27,8 +27,6 @@ describe('create Request with interceptoprs', () => {
     r.manager.addLayer(layoutApi, 'api')
 
     const l = r.manager.getLayer('api')
-
-
 
     assert.strictEqual(3, l.interceptors.request.length)
     assert.strictEqual(0, l.interceptors.response.length)
