@@ -18,7 +18,7 @@ const ActionInterceptorBuild = (interceptorConfig = defaultInterceptorConfig()) 
 
     if (action) {
       action.run(options, response)
-      throw new axios.Cancel(action)
+      throw new axios.Cancel()
     }
 
     return response
