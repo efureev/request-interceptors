@@ -85,4 +85,5 @@ describe('create Request with interceptoprs', () => {
     assert.strictEqual('bf48b829-1d3b-4443-a4fc-269935de2748', responseUuid.data('id'))
     assert.strictEqual(true, isArray(responseUuid.data('permissions')))
   })
+    .timeout(10000);
 })
