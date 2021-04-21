@@ -50,5 +50,6 @@ describe('create Request with interceptoprs', () => {
       assert.strictEqual(true, buildReq.wrapper.selectConfig.requestConfig.runRequestInterceptors.includes(v))
     })
   })
+    .timeout(10000)
 
 })
