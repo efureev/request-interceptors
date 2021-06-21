@@ -49,7 +49,7 @@ export default class ResponseWrapper {
     }
 
     const dk = this.dataKeyName()
-    const data = !isEmpty(dk) ? this.response.data[dk] : this.response.data
+    const data = !isEmpty(dk) && this.response.data[dk] !== undefined ? this.response.data[dk] : this.response.data
 
     if (isObject(data)) {
       this.datas.data = { ...data }
