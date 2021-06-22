@@ -8,6 +8,8 @@ manager.add('download', DownloadAction)
 manager.add('blob', BlobAction)
 manager.add('redirect', RedirectAction)
 
+export { manager }
+
 export function buildAction(data) {
   if (!isObject(data) || isEmpty(data.type)) {
     return null
