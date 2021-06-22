@@ -111,7 +111,7 @@ export default class ResponseWrapper {
    * @return {*}
    */
   data(parameter = null) {
-    if (this.isContent()) {
+    if (this.isContent() || this.isBinary()) {
       return this.datas.data
     }
     return this.get(`data${parameter ? `.${parameter}` : ''}`)
