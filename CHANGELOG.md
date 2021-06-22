@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning][semver].
 
 ## [unreleased]
 
+## [0.0.11] - 2021-06-22
+
+### Fixed
+
+- Some issues have been fixed
+
+### Added
+
+- Init repo
+
 ## [0.0.1] - 2021-03-22
 
 ### Added
