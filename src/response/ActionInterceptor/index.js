@@ -5,14 +5,16 @@ const defaultInterceptorConfig = () => ({
   actionAttributeName: 'status',
 })
 
-const errHandler = (error) => {
+const errHandler = (interceptorConfig) => (error) => {
   const { config } = error
 
-  const action = buildAction(error.data(interceptorConfig.actionAttributeName))
+  if (error.data && error.data[interceptorConfig.actionAttributeName]) {
+    const action = buildAction(error.data[interceptorConfig.actionAttributeName])
 
-  if (action) {
-    action.run(config, error.response)
-    throw new axios.Cancel()
+    if (action) {
+      action.run(config, error.response)
+      throw new axios.Cancel()
+    }
   }
 
   return Promise.reject(error)
@@ -37,7 +39,7 @@ const ActionInterceptorBuild = (interceptorConfig = defaultInterceptorConfig()) 
 
       return response
     },
-    errHandler,
+    errHandler(interceptorConfig),
   ]
 
 export {
