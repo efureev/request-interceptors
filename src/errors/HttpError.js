@@ -70,4 +70,17 @@ export default class HttpError extends Error {
   get(key) {
     return select(this, key)
   }
+
+  /**
+   * Получение основных данных
+   *
+   * @param {string|null} parameter
+   * @return {*}
+   *
+   * @example errorWrap.data('status')
+   * @example errorWrap.data()
+   */
+  data(parameter = null) {
+    return this.get(`response.data${parameter ? `.${parameter}` : ''}`)
+  }
 }

@@ -5,24 +5,40 @@ const defaultInterceptorConfig = () => ({
   actionAttributeName: 'status',
 })
 
-const ActionInterceptorBuild = (interceptorConfig = defaultInterceptorConfig()) => (options) =>
-  /**
-   * @param {ResponseWrapper} response
-   * @return {ResponseWrapper}
-   */
-    (response) => {
-    const action = buildAction(!response.isBinary()
-      ? response.extra(interceptorConfig.actionAttributeName)
-      : { type: 'blob' },
-    )
+const errHandler = (error) => {
+  const { config } = error
 
-    if (action) {
-      action.run(options, response)
-      throw new axios.Cancel()
-    }
+  const action = buildAction(error.data(interceptorConfig.actionAttributeName))
 
-    return response
+  if (action) {
+    action.run(config, error.response)
+    throw new axios.Cancel()
   }
+
+  return Promise.reject(error)
+}
+
+const ActionInterceptorBuild = (interceptorConfig = defaultInterceptorConfig()) => (options) =>
+  [
+    /**
+     * @param {ResponseWrapper} response
+     * @return {ResponseWrapper}
+     */
+      (response) => {
+      const action = buildAction(!response.isBinary()
+        ? response.extra(interceptorConfig.actionAttributeName)
+        : { type: 'blob' },
+      )
+
+      if (action) {
+        action.run(options, response)
+        throw new axios.Cancel()
+      }
+
+      return response
+    },
+    errHandler,
+  ]
 
 export {
   ActionInterceptorBuild,
