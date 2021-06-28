@@ -5,7 +5,7 @@ const defaultInterceptorConfig = () => ({
   actionAttributeName: 'status',
 })
 
-const errHandler = (interceptorConfig) => (error) => {
+const errHandler = (interceptorConfig, configLayer) => (error) => {
   const { config } = error
 
   if (error.data && error.data[interceptorConfig.actionAttributeName]) {
@@ -26,32 +26,35 @@ const errHandler = (interceptorConfig) => (error) => {
   return Promise.reject(error)
 }
 
+const successHandler = (interceptorConfig, configLayer) =>
+  /**
+   * @param {ResponseWrapper} response
+   * @return {ResponseWrapper}
+   */
+    (response) => {
+
+    const action = buildAction(!response.isBinary()
+      ? response.extra(interceptorConfig.actionAttributeName)
+      : { type: 'blob' },
+    )
+
+    if (action) {
+      action.run(configLayer, response)
+      if (configLayer.extra.onlyOneAction) {
+        const err = new axios.Cancel()
+        err.response = response
+
+        throw err
+      }
+    }
+
+    return response
+  }
+
 const ActionInterceptorBuild = (interceptorConfig = defaultInterceptorConfig()) => (configLayer) =>
   [
-    /**
-     * @param {ResponseWrapper} response
-     * @return {ResponseWrapper}
-     */
-      (response) => {
-
-      const action = buildAction(!response.isBinary()
-        ? response.extra(interceptorConfig.actionAttributeName)
-        : { type: 'blob' },
-      )
-
-      if (action) {
-        action.run(configLayer, response)
-        if (configLayer.extra.onlyOneAction) {
-          const err = new axios.Cancel()
-          err.response = response
-
-          throw err
-        }
-      }
-
-      return response
-    },
-    errHandler(interceptorConfig),
+    successHandler(interceptorConfig, configLayer),
+    errHandler(interceptorConfig, configLayer),
   ]
 
 export {
