@@ -1,7 +1,7 @@
 const errHandler = (error) => {
   console.info(
     `\t❌ [${error.response.config.method.toUpperCase()}]  ${
-      error.response.request.responseURL
+      error.response.request.responseURL || error.response.request.res.responseURL
     }`,
   )
   return Promise.reject(error)
@@ -10,7 +10,7 @@ const errHandler = (error) => {
 const successHandler = (response) => {
   console.info(
     `\t✅ [${response.config.method.toUpperCase()}]  ${
-      response.request.responseURL
+      response.request.responseURL || response.request.res.responseURL
     }`,
   )
   return response
