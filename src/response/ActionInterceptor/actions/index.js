@@ -15,6 +15,10 @@ export function buildAction(data) {
     return null
   }
 
+  if (data.private) {
+    return null
+  }
+
   const action = manager.get(data.type)
   if (!action) {
     return null
