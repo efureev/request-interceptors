@@ -1,6 +1,6 @@
 {
   "name": "@feugene/request-interceptors",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Interceptors for axios",
   "main": "dist/index.js",
   "keywords": [
