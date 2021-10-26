@@ -13,7 +13,7 @@ const getFileName = (contentDisposition, value) => {
   return 'download-file'
 }
 
-const buildReader = ({ filename }) => {
+const buildReader = ({ filename }, fnOnDone) => {
   const reader = new FileReader()
 
   reader.onloadend = function() {
@@ -31,6 +31,8 @@ const buildReader = ({ filename }) => {
     link.click()
 
     link.remove()
+
+    fnOnDone()
   }
 
   return reader
@@ -48,7 +50,7 @@ export default class BlobAction extends BaseAction {
     const headerFilename = response.response.headers['x-filename']
     const filename = getFileName(contentDisposition, b64ToUtf8Safe(headerFilename))
 
-    buildReader({ filename })
+    buildReader({ filename }, () => { this.done() })
       .readAsDataURL(
         new Blob([responseData], {
           type: responseData.type || 'application/octet-stream',

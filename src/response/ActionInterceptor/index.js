@@ -34,11 +34,13 @@ const successHandler = (interceptorConfig, configLayer) =>
     (response) => {
 
     const action = buildAction(!response.isBinary()
-      ? response.extra(interceptorConfig.actionAttributeName)
+      ? response.response.data[interceptorConfig.actionAttributeName]
       : { type: 'blob' },
     )
 
     if (action) {
+      response.action = action
+
       action.run(configLayer, response)
       if (configLayer.extra.onlyOneAction) {
         const err = new axios.Cancel()

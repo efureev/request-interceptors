@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning][semver].
 
 ## [unreleased]
 
+## [0.3.0] - 2021-10-26
+
+### Added
+
+- add `executed` to `ActionInterceptor::BaseAction`
+
+### Fixed
+
+- some fixes in `ActionInterceptor`
+
 ## [0.1.0] - 2021-08-09
 
 ### Added

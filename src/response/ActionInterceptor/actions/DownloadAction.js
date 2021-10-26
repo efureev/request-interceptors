@@ -19,5 +19,7 @@ export default class DownloadAction extends BaseAction {
     document.body.append(link)
     link.click()
     link.remove()
+
+    this.done()
   }
 }
