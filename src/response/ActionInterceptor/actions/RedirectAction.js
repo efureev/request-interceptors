@@ -23,7 +23,10 @@ export default class RedirectAction extends BaseAction {
   }
 
   openUrl(url) {
-    window.open(url, this.target) || (window.location = url)
+    const a = document.createElement('a')
+    a.setAttribute('href', url)
+    a.setAttribute('target', this.target)
+    a.click()
 
     this.done()
   }
