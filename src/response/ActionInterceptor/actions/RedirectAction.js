@@ -23,7 +23,7 @@ export default class RedirectAction extends BaseAction {
   }
 
   openUrl(url) {
-    window.open(url, this.target) || window.location.replace(url)
+    window.open(url, this.target) || (window.location = url)
 
     this.done()
   }
