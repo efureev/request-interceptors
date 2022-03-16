@@ -4,7 +4,11 @@ export default class ContentAction {
     this.rawData = data
     this.executed = false
     this.interceptorConfig = interceptorConfig
+
+    this.applyProperties(data)
   }
+
+  applyProperties(data) {}
 
   run(config, response) {
     if (!this.shouldHandle()) {

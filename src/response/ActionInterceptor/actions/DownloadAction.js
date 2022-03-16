@@ -1,9 +1,7 @@
 import BaseAction from './BaseAction'
 
 export default class DownloadAction extends BaseAction {
-  constructor(data, interceptorConfig) {
-    super(data, interceptorConfig)
-
+  applyProperties(data) {
     this.url = data.url
     this.name = data.name
   }
