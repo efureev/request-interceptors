@@ -8,7 +8,7 @@ export default class DownloadAction extends BaseAction {
     this.name = data.name
   }
 
-  run(axiosConfig) {
+  handle(axiosConfig, response) {
     const link = document.createElement('a')
 
     link.href = this.url
@@ -19,7 +19,5 @@ export default class DownloadAction extends BaseAction {
     document.body.append(link)
     link.click()
     link.remove()
-
-    this.done()
   }
 }

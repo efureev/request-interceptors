@@ -5,9 +5,23 @@ export default class ContentAction {
     this.executed = false
   }
 
-  run(config, response) {}
+  run(config, response) {
+    if (!this.shouldHandle()) {
+      return
+    }
+
+    if (this.handle(config, response) !== false) {
+      this.done()
+    }
+  }
+
+  handle(config, response) {}
 
   done() {
     this.executed = true
+  }
+
+  shouldHandle() {
+    return true
   }
 }
