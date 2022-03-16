@@ -9,11 +9,11 @@ export default class RedirectAction extends BaseAction {
     this.normalizeTarget()
   }
 
-  handle(axiosConfig, response) {
+  run(axiosConfig, response) {
     if (/^http(s)?:\/\//.test(this.url)) {
       this.openUrl(this.url)
 
-      return false
+      return
     }
 
     const url = new URL(window.location.origin + this.url)
@@ -26,6 +26,8 @@ export default class RedirectAction extends BaseAction {
     a.setAttribute('href', url)
     a.setAttribute('target', this.target)
     a.click()
+
+    this.done()
   }
 
   normalizeTarget() {
