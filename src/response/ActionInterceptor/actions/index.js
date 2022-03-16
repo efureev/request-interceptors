@@ -10,7 +10,7 @@ manager.add('redirect', RedirectAction)
 
 export { manager }
 
-export function buildAction(data) {
+export function buildAction(data, interceptorConfig) {
   if (!isObject(data) || isEmpty(data.type)) {
     return null
   }
@@ -24,5 +24,5 @@ export function buildAction(data) {
     return null
   }
 
-  return new action(data)
+  return new action(data, interceptorConfig)
 }

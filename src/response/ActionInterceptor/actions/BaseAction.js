@@ -1,8 +1,9 @@
 export default class ContentAction {
-  constructor(data) {
+  constructor(data, interceptorConfig) {
     this.type = data.type
     this.rawData = data
     this.executed = false
+    this.interceptorConfig = interceptorConfig
   }
 
   run(config, response) {

@@ -9,7 +9,10 @@ const errHandler = (interceptorConfig, configLayer) => (error) => {
   const { config } = error
 
   if (error.data && error.data[interceptorConfig.actionAttributeName]) {
-    const action = buildAction(error.data[interceptorConfig.actionAttributeName])
+    const action = buildAction(
+      error.data[interceptorConfig.actionAttributeName],
+      interceptorConfig,
+    )
 
     if (action) {
       action.run(config, error.response)
@@ -33,10 +36,11 @@ const successHandler = (interceptorConfig, configLayer) =>
    */
     (response) => {
 
-    const action = buildAction(!response.isBinary()
-      ? response.response.data[interceptorConfig.actionAttributeName]
-      : { type: 'blob' },
-    )
+    const action = buildAction(
+      !response.isBinary()
+        ? response.response.data[interceptorConfig.actionAttributeName]
+        : { type: 'blob' },
+      interceptorConfig)
 
     if (action) {
       response.action = action

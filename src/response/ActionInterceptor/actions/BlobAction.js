@@ -16,7 +16,7 @@ const getFileName = (contentDisposition, value) => {
 const buildReader = ({ filename }, fnOnDone) => {
   const reader = new FileReader()
 
-  reader.onloadend = function() {
+  reader.onloadend = function () {
     let url = reader.result
 
     url = url.replace(/^data:[^;]*;/, 'data:attachment/file;')
@@ -39,10 +39,6 @@ const buildReader = ({ filename }, fnOnDone) => {
 }
 
 export default class BlobAction extends BaseAction {
-  constructor(data) {
-    super(data)
-  }
-
   run(axiosConfig, response) {
     const responseData = response.data()
 

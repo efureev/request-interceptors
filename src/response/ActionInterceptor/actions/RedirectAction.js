@@ -1,8 +1,8 @@
 import BaseAction from './BaseAction'
 
 export default class RedirectAction extends BaseAction {
-  constructor(data) {
-    super(data)
+  constructor(data, interceptorConfig) {
+    super(data, interceptorConfig)
     this.url = data.url
     this.target = data.target
 
