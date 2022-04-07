@@ -28,7 +28,7 @@ export default class RedirectAction extends BaseAction {
 
     this.done()
 
-    throw 'Redirect'
+    throw this
   }
 
   normalizeTarget() {
