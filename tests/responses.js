@@ -84,6 +84,8 @@ describe('create Request with interceptoprs', () => {
     assert.strictEqual('data', responseUuid.config.dataKey)
     assert.strictEqual('entity', responseUuid.type)
     assert.strictEqual('bf48b829-1d3b-4443-a4fc-269935de2748', responseUuid.data('id'))
+    console.log(responseUuid.data('permissions'))
+
     assert.strictEqual(false, isNull(responseUuid.data('permissions')))
   })
     .timeout(10000);
