@@ -1,4 +1,5 @@
 import BaseAction from './BaseAction'
+import ErrorAction from './ErrorAction'
 
 export default class RedirectAction extends BaseAction {
   applyProperties(data) {
@@ -28,7 +29,7 @@ export default class RedirectAction extends BaseAction {
 
     this.done()
 
-    throw this
+    throw new ErrorAction(`Redirect to ${url}`, this)
   }
 
   normalizeTarget() {
