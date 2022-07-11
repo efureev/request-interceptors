@@ -5,7 +5,7 @@ const ConsoleLogRequestInterceptor = function(enable = false) {
 
   return (options, requestExtra) => (config) => {
     console.info(
-      `\t🌐 [${config.method.toUpperCase()}] ${config.baseURL}${config.url}`,
+      `\t🌐 [${config.method.toUpperCase()}] ${config.baseURL}/${config.url}`,
     )
     return config
   }
