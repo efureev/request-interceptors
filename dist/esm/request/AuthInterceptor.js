@@ -1,7 +1,7 @@
 import { isFunction } from '@feugene/mu';
 
-const AuthInterceptor = (options, extra) => config => {
-  const auth = options.getExtra('auth');
+const AuthInterceptor = (layerConfig, extra) => config => {
+  const auth = layerConfig.getExtra('auth');
 
   if (auth) {
     ;

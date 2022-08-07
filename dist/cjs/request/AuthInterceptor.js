@@ -7,9 +7,9 @@ exports.default = void 0;
 
 var _mu = require("@feugene/mu");
 
-var AuthInterceptor = function AuthInterceptor(options, extra) {
+var AuthInterceptor = function AuthInterceptor(layerConfig, extra) {
   return function (config) {
-    var auth = options.getExtra('auth');
+    var auth = layerConfig.getExtra('auth');
 
     if (auth) {
       ;
