@@ -5,7 +5,7 @@ import ResponseWrapper from '../WrapperInterceptor/ResponseWrapper'
 import { createResponseWrapper } from '../WrapperInterceptor/WrapperInterceptor'
 import OnlyOneActionError from './actions/OnlyOneActionError'
 import HttpError from '../../errors/HttpError'
-import makeError from '../../errors'
+import { isNativeError, makeHttpError } from '../../errors'
 
 const defaultConfig: ActionInterceptorConfig = {
   actionAttributeName: 'status',
@@ -16,27 +16,28 @@ export interface ActionInterceptorConfig {
 }
 
 const errHandler = (interceptorConfig: ActionInterceptorConfig, configLayer: LayerConfig, requestExtra: ExtraProperties) =>
-  (error: AxiosError | HttpError) => {
-    if (!(error instanceof HttpError)) {
-      error = makeError(error)
+  (error: AxiosError | HttpError | Error) => {
+    if (isNativeError(error)) {
+      return Promise.reject(error)
     }
+    const e: HttpError = error instanceof HttpError ? error : makeHttpError(<AxiosError>error)
 
-    if (error.data && error.data[interceptorConfig.actionAttributeName]) {
+    if (e.data && e.data[interceptorConfig.actionAttributeName]) {
       const action = buildAction(
-        error.data[interceptorConfig.actionAttributeName],
+        e.data[interceptorConfig.actionAttributeName],
         interceptorConfig,
         requestExtra,
       )
 
-      if (action && error.response) {
-        action.run(configLayer, error.response)
+      if (action && e.response) {
+        action.run(configLayer, e.response)
         if (configLayer.getExtra('onlyOneAction')) {
-          throw new OnlyOneActionError(error.response)
+          throw new OnlyOneActionError(e.response)
         }
       }
     }
 
-    return Promise.reject(error)
+    return Promise.reject(e)
   }
 
 const successHandler = (interceptorConfig: ActionInterceptorConfig, configLayer: LayerConfig, requestExtra: ExtraProperties) =>

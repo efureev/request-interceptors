@@ -13,7 +13,7 @@ export default class HttpError extends Error {
     this.statusCode = status;
     this.error = error;
     this.stack = error.stack || new Error().stack;
-    this.url = error.request.responseURL;
+    this.url = error.request?.responseURL;
     this.config = error.config;
     this.request = error?.request;
     this.response = error?.response;

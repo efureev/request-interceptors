@@ -1,18 +1,23 @@
-import makeError from '../../errors'
+import { isNativeError, makeHttpError } from '../../errors'
 import ResponseWrapper from './ResponseWrapper'
 import { isFunction } from '@feugene/mu'
 import type { ExtraProperties, InterceptorFn, InterceptorNormal, LayerConfig } from '@feugene/layer-request'
 import type { AxiosError, AxiosResponse } from 'axios'
 
 
-const errHandler = (layerConfig: LayerConfig) => (error: AxiosError) => {
-  const { config } = error
+const errHandler = (layerConfig: LayerConfig) => (error: AxiosError | Error) => {
+  if (isNativeError(error)) {
+    return Promise.reject(error)
+  }
+
+  const { config } = <AxiosError>error
   // If config does not exist or the retry option is not set, reject
   // @ts-ignore
   if (!config || !config.retry) {
-    return Promise.reject(makeError(error))
+    return Promise.reject(makeHttpError(<AxiosError>error))
   }
-  if (!error.response) {
+
+  if (!(<AxiosError>error).response) {
     const onThrowErrorFn = layerConfig.getExtra('onThrowErrorFn')
     if (isFunction(onThrowErrorFn)) {
       return onThrowErrorFn(error, this)
@@ -21,7 +26,7 @@ const errHandler = (layerConfig: LayerConfig) => (error: AxiosError) => {
     }
   }
 
-  const errorWrap = makeError(error)
+  const errorWrap = makeHttpError(<AxiosError>error)
 
   return Promise.reject(errorWrap)
 }

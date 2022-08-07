@@ -5,6 +5,6 @@ import HttpError from '../../errors/HttpError';
 export interface ActionInterceptorConfig {
     actionAttributeName: string;
 }
-declare const ActionInterceptor: (interceptorConfig?: ActionInterceptorConfig) => (layerConfig: LayerConfig, requestExtra: ExtraProperties) => (((error: AxiosError | HttpError) => Promise<never>) | ((response: AxiosResponse | ResponseWrapper) => ResponseWrapper))[];
+declare const ActionInterceptor: (interceptorConfig?: ActionInterceptorConfig) => (layerConfig: LayerConfig, requestExtra: ExtraProperties) => (((error: AxiosError | HttpError | Error) => Promise<never>) | ((response: AxiosResponse | ResponseWrapper) => ResponseWrapper))[];
 export { ActionInterceptor, };
 //# sourceMappingURL=ActionInterceptor.d.ts.map

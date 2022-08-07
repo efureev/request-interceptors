@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = exports.createResponseWrapper = void 0;
 
-var _errors = _interopRequireDefault(require("../../errors"));
+var _errors = require("../../errors");
 
 var _ResponseWrapper = _interopRequireDefault(require("./ResponseWrapper"));
 
@@ -17,11 +17,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var errHandler = function errHandler(layerConfig) {
   return function (error) {
-    var config = error.config; // If config does not exist or the retry option is not set, reject
+    if ((0, _errors.isNativeError)(error)) {
+      return Promise.reject(error);
+    }
+
+    var _ref = error,
+        config = _ref.config; // If config does not exist or the retry option is not set, reject
     // @ts-ignore
 
     if (!config || !config.retry) {
-      return Promise.reject((0, _errors.default)(error));
+      return Promise.reject((0, _errors.makeHttpError)(error));
     }
 
     if (!error.response) {
@@ -33,7 +38,7 @@ var errHandler = function errHandler(layerConfig) {
       }
     }
 
-    var errorWrap = (0, _errors.default)(error);
+    var errorWrap = (0, _errors.makeHttpError)(error);
     return Promise.reject(errorWrap);
   };
 };

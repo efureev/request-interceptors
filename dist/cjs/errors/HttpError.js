@@ -50,6 +50,8 @@ var HttpError = /*#__PURE__*/function (_Error) {
   var _super = _createSuper(HttpError);
 
   function HttpError(error, status) {
+    var _error$request;
+
     var _this;
 
     _classCallCheck(this, HttpError);
@@ -63,7 +65,7 @@ var HttpError = /*#__PURE__*/function (_Error) {
     _this.statusCode = status;
     _this.error = error;
     _this.stack = error.stack || new Error().stack;
-    _this.url = error.request.responseURL;
+    _this.url = (_error$request = error.request) === null || _error$request === void 0 ? void 0 : _error$request.responseURL;
     _this.config = error.config;
     _this.request = error === null || error === void 0 ? void 0 : error.request;
     _this.response = error === null || error === void 0 ? void 0 : error.response;

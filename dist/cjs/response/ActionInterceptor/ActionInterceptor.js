@@ -15,7 +15,7 @@ var _OnlyOneActionError = _interopRequireDefault(require("./actions/OnlyOneActio
 
 var _HttpError = _interopRequireDefault(require("../../errors/HttpError"));
 
-var _errors = _interopRequireDefault(require("../../errors"));
+var _errors = require("../../errors");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -25,23 +25,25 @@ var defaultConfig = {
 
 var errHandler = function errHandler(interceptorConfig, configLayer, requestExtra) {
   return function (error) {
-    if (!(error instanceof _HttpError.default)) {
-      error = (0, _errors.default)(error);
+    if ((0, _errors.isNativeError)(error)) {
+      return Promise.reject(error);
     }
 
-    if (error.data && error.data[interceptorConfig.actionAttributeName]) {
-      var action = (0, _actions.buildAction)(error.data[interceptorConfig.actionAttributeName], interceptorConfig, requestExtra);
+    var e = error instanceof _HttpError.default ? error : (0, _errors.makeHttpError)(error);
 
-      if (action && error.response) {
-        action.run(configLayer, error.response);
+    if (e.data && e.data[interceptorConfig.actionAttributeName]) {
+      var action = (0, _actions.buildAction)(e.data[interceptorConfig.actionAttributeName], interceptorConfig, requestExtra);
+
+      if (action && e.response) {
+        action.run(configLayer, e.response);
 
         if (configLayer.getExtra('onlyOneAction')) {
-          throw new _OnlyOneActionError.default(error.response);
+          throw new _OnlyOneActionError.default(e.response);
         }
       }
     }
 
-    return Promise.reject(error);
+    return Promise.reject(e);
   };
 };
 

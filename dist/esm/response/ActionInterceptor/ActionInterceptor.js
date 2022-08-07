@@ -3,29 +3,31 @@ import ResponseWrapper from '../WrapperInterceptor/ResponseWrapper';
 import { createResponseWrapper } from '../WrapperInterceptor/WrapperInterceptor';
 import OnlyOneActionError from './actions/OnlyOneActionError';
 import HttpError from '../../errors/HttpError';
-import makeError from '../../errors';
+import { isNativeError, makeHttpError } from '../../errors';
 const defaultConfig = {
   actionAttributeName: 'status'
 };
 
 const errHandler = (interceptorConfig, configLayer, requestExtra) => error => {
-  if (!(error instanceof HttpError)) {
-    error = makeError(error);
+  if (isNativeError(error)) {
+    return Promise.reject(error);
   }
 
-  if (error.data && error.data[interceptorConfig.actionAttributeName]) {
-    const action = buildAction(error.data[interceptorConfig.actionAttributeName], interceptorConfig, requestExtra);
+  const e = error instanceof HttpError ? error : makeHttpError(error);
 
-    if (action && error.response) {
-      action.run(configLayer, error.response);
+  if (e.data && e.data[interceptorConfig.actionAttributeName]) {
+    const action = buildAction(e.data[interceptorConfig.actionAttributeName], interceptorConfig, requestExtra);
+
+    if (action && e.response) {
+      action.run(configLayer, e.response);
 
       if (configLayer.getExtra('onlyOneAction')) {
-        throw new OnlyOneActionError(error.response);
+        throw new OnlyOneActionError(e.response);
       }
     }
   }
 
-  return Promise.reject(error);
+  return Promise.reject(e);
 };
 
 const successHandler = (interceptorConfig, configLayer, requestExtra) => response => {

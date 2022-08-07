@@ -1,15 +1,19 @@
-import makeError from '../../errors';
+import { isNativeError, makeHttpError } from '../../errors';
 import ResponseWrapper from './ResponseWrapper';
 import { isFunction } from '@feugene/mu';
 
 const errHandler = layerConfig => error => {
+  if (isNativeError(error)) {
+    return Promise.reject(error);
+  }
+
   const {
     config
   } = error; // If config does not exist or the retry option is not set, reject
   // @ts-ignore
 
   if (!config || !config.retry) {
-    return Promise.reject(makeError(error));
+    return Promise.reject(makeHttpError(error));
   }
 
   if (!error.response) {
@@ -21,7 +25,7 @@ const errHandler = layerConfig => error => {
     }
   }
 
-  const errorWrap = makeError(error);
+  const errorWrap = makeHttpError(error);
   return Promise.reject(errorWrap);
 };
 
