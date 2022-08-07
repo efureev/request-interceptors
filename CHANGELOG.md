@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning][semver].
 
 ## [unreleased]
 
+## [1.0.0] - 2022-08-07
+
+### Changed
+
+- Turn the package on TypeScript
+
 ## [0.3.0] - 2021-10-26
 
 ### Added
@@ -42,7 +48,9 @@ and this project adheres to [Semantic Versioning][semver].
 - Init repo
 
 [unreleased]: https://github.com/efureev/request-interceptors/compare/v0.0.1...HEAD
+
 [0.0.1]: https://github.com/efureev/request-interceptors/releases/tag/v0.0.1
 
 [keepachangelog]:https://keepachangelog.com/en/1.1.0/
+
 [semver]:https://semver.org/spec/v2.0.0.html

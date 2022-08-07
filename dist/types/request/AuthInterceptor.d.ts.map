@@ -1,0 +1,1 @@
+{"version":3,"file":"AuthInterceptor.d.ts","sourceRoot":"","sources":["../../../src/request/AuthInterceptor.ts"],"names":[],"mappings":"AACA,OAAO,KAAK,EAAE,eAAe,EAAE,uBAAuB,EAAE,WAAW,EAAE,MAAM,wBAAwB,CAAA;AACnG,OAAO,KAAK,EAAE,kBAAkB,EAAuB,MAAM,OAAO,CAAA;AAEpE,QAAA,MAAM,eAAe,YACT,WAAW,SAAS,eAAe,KAAG,wBAAwB,kBAAkB,CAUzF,CAAA;AAEH,eAAe,eAAe,CAAA"}

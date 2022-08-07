@@ -1,0 +1,1 @@
+{"version":3,"file":"ConflictError.js","names":["HttpError","ConflictError"],"sources":["../../../src/errors/ConflictError.ts"],"sourcesContent":["import HttpError from './HttpError'\n\nexport default class ConflictError extends HttpError {}\n"],"mappings":"AAAA,OAAOA,SAAP,MAAsB,aAAtB;AAEA,eAAe,MAAMC,aAAN,SAA4BD,SAA5B,CAAsC"}

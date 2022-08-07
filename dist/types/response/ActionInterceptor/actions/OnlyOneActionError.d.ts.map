@@ -1,0 +1,1 @@
+{"version":3,"file":"OnlyOneActionError.d.ts","sourceRoot":"","sources":["../../../../../src/response/ActionInterceptor/actions/OnlyOneActionError.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,aAAa,EAAE,MAAM,OAAO,CAAA;AAE1C,MAAM,CAAC,OAAO,OAAO,kBAAmB,SAAQ,KAAK;IAC5C,QAAQ,EAAE,aAAa,CAAA;gBAElB,QAAQ,EAAE,aAAa;CAIpC"}
