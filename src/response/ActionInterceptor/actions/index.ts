@@ -12,7 +12,7 @@ globalActionManager.add('download', DownloadAction)
 globalActionManager.add('blob', BlobAction)
 globalActionManager.add('redirect', RedirectAction)
 
-export { globalActionManager, BaseAction }
+export { globalActionManager }
 
 export function buildAction(data: RawDataType & { private: boolean }, interceptorConfig: ActionInterceptorConfig): Nullable<BaseAction> {
   if (!isObject(data) || isEmpty(data.type)) {
@@ -30,3 +30,6 @@ export function buildAction(data: RawDataType & { private: boolean }, intercepto
 
   return new action(data, interceptorConfig)
 }
+
+
+export { BaseAction, DownloadAction, BlobAction, RedirectAction }
