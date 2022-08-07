@@ -7,7 +7,7 @@ import BaseAction from './BaseAction';
 globalActionManager.add('download', DownloadAction);
 globalActionManager.add('blob', BlobAction);
 globalActionManager.add('redirect', RedirectAction);
-export { globalActionManager, BaseAction };
+export { globalActionManager };
 export function buildAction(data, interceptorConfig) {
   if (!isObject(data) || isEmpty(data.type)) {
     return;
@@ -25,4 +25,5 @@ export function buildAction(data, interceptorConfig) {
 
   return new action(data, interceptorConfig);
 }
+export { BaseAction, DownloadAction, BlobAction, RedirectAction };
 //# sourceMappingURL=index.js.map

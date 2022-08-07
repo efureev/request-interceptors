@@ -9,6 +9,24 @@ Object.defineProperty(exports, "BaseAction", {
     return _BaseAction.default;
   }
 });
+Object.defineProperty(exports, "BlobAction", {
+  enumerable: true,
+  get: function get() {
+    return _BlobAction.default;
+  }
+});
+Object.defineProperty(exports, "DownloadAction", {
+  enumerable: true,
+  get: function get() {
+    return _DownloadAction.default;
+  }
+});
+Object.defineProperty(exports, "RedirectAction", {
+  enumerable: true,
+  get: function get() {
+    return _RedirectAction.default;
+  }
+});
 exports.buildAction = buildAction;
 Object.defineProperty(exports, "globalActionManager", {
   enumerable: true,
