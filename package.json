@@ -50,7 +50,7 @@
     "rollup": "^2.77.2",
     "rollup-plugin-terser": "^7.0.2",
     "typescript": "^4.7.4",
-    "@feugene/layer-request": "^1.0.6",
+    "@feugene/layer-request": "^1.0.7",
     "axios": "^0.27.2"
   },
   "dependencies": {
@@ -58,7 +58,7 @@
   },
   "peerDependencies": {
     "axios": "^0.27.2",
-    "@feugene/layer-request": "^1.0.2"
+    "@feugene/layer-request": "^1.0.7"
   },
   "nyc": {
     "extension": [
