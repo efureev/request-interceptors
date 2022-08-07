@@ -1,6 +1,6 @@
 {
   "name": "@feugene/request-interceptors",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Interceptors for axios",
   "keywords": [
     "request"
