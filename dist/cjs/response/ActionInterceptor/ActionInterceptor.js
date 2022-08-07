@@ -23,14 +23,14 @@ var defaultConfig = {
   actionAttributeName: 'status'
 };
 
-var errHandler = function errHandler(interceptorConfig, configLayer) {
+var errHandler = function errHandler(interceptorConfig, configLayer, requestExtra) {
   return function (error) {
     if (!(error instanceof _HttpError.default)) {
       error = (0, _errors.default)(error);
     }
 
     if (error.data && error.data[interceptorConfig.actionAttributeName]) {
-      var action = (0, _actions.buildAction)(error.data[interceptorConfig.actionAttributeName], interceptorConfig);
+      var action = (0, _actions.buildAction)(error.data[interceptorConfig.actionAttributeName], interceptorConfig, requestExtra);
 
       if (action && error.response) {
         action.run(configLayer, error.response);
@@ -45,7 +45,7 @@ var errHandler = function errHandler(interceptorConfig, configLayer) {
   };
 };
 
-var successHandler = function successHandler(interceptorConfig, configLayer) {
+var successHandler = function successHandler(interceptorConfig, configLayer, requestExtra) {
   return function (response) {
     if (!(response instanceof _ResponseWrapper.default)) {
       response = (0, _WrapperInterceptor.createResponseWrapper)(response, configLayer);
@@ -54,7 +54,7 @@ var successHandler = function successHandler(interceptorConfig, configLayer) {
     var rawData = !response.isBinary() ? response.response.data[interceptorConfig.actionAttributeName] : {
       type: 'blob'
     };
-    var action = (0, _actions.buildAction)(rawData, interceptorConfig);
+    var action = (0, _actions.buildAction)(rawData, interceptorConfig, requestExtra);
 
     if (action) {
       // @ts-ignore
@@ -73,7 +73,7 @@ var successHandler = function successHandler(interceptorConfig, configLayer) {
 var ActionInterceptor = function ActionInterceptor() {
   var interceptorConfig = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultConfig;
   return function (layerConfig, requestExtra) {
-    return [successHandler(interceptorConfig, layerConfig), errHandler(interceptorConfig, layerConfig)];
+    return [successHandler(interceptorConfig, layerConfig, requestExtra), errHandler(interceptorConfig, layerConfig, requestExtra)];
   };
 };
 

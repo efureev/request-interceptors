@@ -1,11 +1,12 @@
 export default class BaseAction {
   executed = false;
 
-  constructor(data, interceptorConfig) {
+  constructor(data, interceptorConfig, requestExtra) {
     this.type = data.type;
     this.rawData = data;
     this.executed = false;
     this.interceptorConfig = interceptorConfig;
+    this.requestExtra = requestExtra;
   }
 
   run(configLayer, response) {

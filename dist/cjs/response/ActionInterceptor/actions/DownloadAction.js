@@ -36,12 +36,12 @@ var DownloadAction = /*#__PURE__*/function (_BaseAction) {
 
   var _super = _createSuper(DownloadAction);
 
-  function DownloadAction(data, interceptorConfig) {
+  function DownloadAction(data, interceptorConfig, requestExtra) {
     var _this;
 
     _classCallCheck(this, DownloadAction);
 
-    _this = _super.call(this, data, interceptorConfig);
+    _this = _super.call(this, data, interceptorConfig, requestExtra);
     _this.url = data.url;
     _this.name = data.name;
     return _this;

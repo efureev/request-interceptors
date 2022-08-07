@@ -8,13 +8,13 @@ const defaultConfig = {
   actionAttributeName: 'status'
 };
 
-const errHandler = (interceptorConfig, configLayer) => error => {
+const errHandler = (interceptorConfig, configLayer, requestExtra) => error => {
   if (!(error instanceof HttpError)) {
     error = makeError(error);
   }
 
   if (error.data && error.data[interceptorConfig.actionAttributeName]) {
-    const action = buildAction(error.data[interceptorConfig.actionAttributeName], interceptorConfig);
+    const action = buildAction(error.data[interceptorConfig.actionAttributeName], interceptorConfig, requestExtra);
 
     if (action && error.response) {
       action.run(configLayer, error.response);
@@ -28,7 +28,7 @@ const errHandler = (interceptorConfig, configLayer) => error => {
   return Promise.reject(error);
 };
 
-const successHandler = (interceptorConfig, configLayer) => response => {
+const successHandler = (interceptorConfig, configLayer, requestExtra) => response => {
   if (!(response instanceof ResponseWrapper)) {
     response = createResponseWrapper(response, configLayer);
   }
@@ -36,7 +36,7 @@ const successHandler = (interceptorConfig, configLayer) => response => {
   const rawData = !response.isBinary() ? response.response.data[interceptorConfig.actionAttributeName] : {
     type: 'blob'
   };
-  const action = buildAction(rawData, interceptorConfig);
+  const action = buildAction(rawData, interceptorConfig, requestExtra);
 
   if (action) {
     // @ts-ignore
@@ -51,7 +51,7 @@ const successHandler = (interceptorConfig, configLayer) => response => {
   return response;
 };
 
-const ActionInterceptor = (interceptorConfig = defaultConfig) => (layerConfig, requestExtra) => [successHandler(interceptorConfig, layerConfig), errHandler(interceptorConfig, layerConfig)];
+const ActionInterceptor = (interceptorConfig = defaultConfig) => (layerConfig, requestExtra) => [successHandler(interceptorConfig, layerConfig, requestExtra), errHandler(interceptorConfig, layerConfig, requestExtra)];
 
 export { ActionInterceptor };
 //# sourceMappingURL=ActionInterceptor.js.map

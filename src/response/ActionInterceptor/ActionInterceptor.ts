@@ -15,7 +15,7 @@ export interface ActionInterceptorConfig {
   actionAttributeName: string
 }
 
-const errHandler = (interceptorConfig: ActionInterceptorConfig, configLayer: LayerConfig) =>
+const errHandler = (interceptorConfig: ActionInterceptorConfig, configLayer: LayerConfig, requestExtra: ExtraProperties) =>
   (error: AxiosError | HttpError) => {
     if (!(error instanceof HttpError)) {
       error = makeError(error)
@@ -25,6 +25,7 @@ const errHandler = (interceptorConfig: ActionInterceptorConfig, configLayer: Lay
       const action = buildAction(
         error.data[interceptorConfig.actionAttributeName],
         interceptorConfig,
+        requestExtra,
       )
 
       if (action && error.response) {
@@ -38,7 +39,7 @@ const errHandler = (interceptorConfig: ActionInterceptorConfig, configLayer: Lay
     return Promise.reject(error)
   }
 
-const successHandler = (interceptorConfig: ActionInterceptorConfig, configLayer: LayerConfig) =>
+const successHandler = (interceptorConfig: ActionInterceptorConfig, configLayer: LayerConfig, requestExtra: ExtraProperties) =>
   (response: AxiosResponse | ResponseWrapper) => {
 
     if (!(response instanceof ResponseWrapper)) {
@@ -49,7 +50,7 @@ const successHandler = (interceptorConfig: ActionInterceptorConfig, configLayer:
       ? response.response.data[interceptorConfig.actionAttributeName]
       : { type: 'blob' }
 
-    const action = buildAction(rawData, interceptorConfig)
+    const action = buildAction(rawData, interceptorConfig, requestExtra)
 
     if (action) {
       // @ts-ignore
@@ -68,8 +69,8 @@ const successHandler = (interceptorConfig: ActionInterceptorConfig, configLayer:
 const ActionInterceptor = (interceptorConfig: ActionInterceptorConfig = defaultConfig) =>
   (layerConfig: LayerConfig, requestExtra: ExtraProperties) =>
     [
-      successHandler(interceptorConfig, layerConfig),
-      errHandler(interceptorConfig, layerConfig),
+      successHandler(interceptorConfig, layerConfig, requestExtra),
+      errHandler(interceptorConfig, layerConfig, requestExtra),
     ]
 
 export {

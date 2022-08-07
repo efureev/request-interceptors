@@ -3,6 +3,7 @@ import BaseAction from './BaseAction'
 import ErrorAction from './ErrorAction'
 import type { ActionInterceptorConfig } from '../ActionInterceptor'
 import type { LayerConfig } from '@feugene/layer-request'
+import { ExtraProperties } from '@feugene/layer-request'
 import type { AxiosResponse } from 'axios'
 import type ResponseWrapper from '../../WrapperInterceptor/ResponseWrapper'
 
@@ -16,8 +17,8 @@ export default class RedirectAction extends BaseAction {
   private readonly url: string
   private readonly target: string = '_self'
 
-  constructor(data: RedirectRawDataType, interceptorConfig: ActionInterceptorConfig) {
-    super(data, interceptorConfig)
+  constructor(data: RawDataType, interceptorConfig: ActionInterceptorConfig, requestExtra: ExtraProperties) {
+    super(data, interceptorConfig, requestExtra)
 
     this.url = data.url
 

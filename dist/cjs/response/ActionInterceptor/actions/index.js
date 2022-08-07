@@ -55,7 +55,7 @@ _ActionsManager.default.add('blob', _BlobAction.default);
 
 _ActionsManager.default.add('redirect', _RedirectAction.default);
 
-function buildAction(data, interceptorConfig) {
+function buildAction(data, interceptorConfig, requestExtra) {
   if (!(0, _mu.isObject)(data) || (0, _mu.isEmpty)(data.type)) {
     return;
   }
@@ -70,6 +70,6 @@ function buildAction(data, interceptorConfig) {
     return;
   }
 
-  return new action(data, interceptorConfig);
+  return new action(data, interceptorConfig, requestExtra);
 }
 //# sourceMappingURL=index.js.map

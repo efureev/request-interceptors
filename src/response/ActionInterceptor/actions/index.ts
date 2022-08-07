@@ -7,6 +7,7 @@ import type { RawDataType } from './BaseAction'
 import BaseAction from './BaseAction'
 import { ActionInterceptorConfig } from '../ActionInterceptor'
 import { Nullable } from '../../../global'
+import { ExtraProperties } from '@feugene/layer-request'
 
 globalActionManager.add('download', DownloadAction)
 globalActionManager.add('blob', BlobAction)
@@ -14,7 +15,11 @@ globalActionManager.add('redirect', RedirectAction)
 
 export { globalActionManager }
 
-export function buildAction(data: RawDataType & { private: boolean }, interceptorConfig: ActionInterceptorConfig): Nullable<BaseAction> {
+export function buildAction(
+  data: RawDataType & { private: boolean },
+  interceptorConfig: ActionInterceptorConfig,
+  requestExtra: ExtraProperties,
+): Nullable<BaseAction> {
   if (!isObject(data) || isEmpty(data.type)) {
     return
   }
@@ -28,7 +33,7 @@ export function buildAction(data: RawDataType & { private: boolean }, intercepto
     return
   }
 
-  return new action(data, interceptorConfig)
+  return new action(data, interceptorConfig, requestExtra)
 }
 
 

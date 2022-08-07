@@ -1,5 +1,5 @@
 import type { ActionInterceptorConfig } from '../ActionInterceptor';
-import type { LayerConfig } from '@feugene/layer-request';
+import type { ExtraProperties, LayerConfig } from '@feugene/layer-request';
 import type { AxiosResponse } from 'axios';
 import type ResponseWrapper from '../../WrapperInterceptor/ResponseWrapper';
 export interface RawDataType extends Record<PropertyKey, any> {
@@ -10,7 +10,8 @@ export default class BaseAction {
     private executed;
     private rawData;
     private interceptorConfig;
-    constructor(data: RawDataType, interceptorConfig: ActionInterceptorConfig);
+    private requestExtra;
+    constructor(data: RawDataType, interceptorConfig: ActionInterceptorConfig, requestExtra: ExtraProperties);
     run(configLayer: LayerConfig, response: AxiosResponse | ResponseWrapper): void;
     /**
      * if return `false` - don't handle an action

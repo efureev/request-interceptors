@@ -3,8 +3,8 @@ import ErrorAction from './ErrorAction';
 export default class RedirectAction extends BaseAction {
   target = '_self';
 
-  constructor(data, interceptorConfig) {
-    super(data, interceptorConfig);
+  constructor(data, interceptorConfig, requestExtra) {
+    super(data, interceptorConfig, requestExtra);
     this.url = data.url;
     const target = data.target;
 

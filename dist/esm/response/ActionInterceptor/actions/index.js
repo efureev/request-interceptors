@@ -8,7 +8,7 @@ globalActionManager.add('download', DownloadAction);
 globalActionManager.add('blob', BlobAction);
 globalActionManager.add('redirect', RedirectAction);
 export { globalActionManager };
-export function buildAction(data, interceptorConfig) {
+export function buildAction(data, interceptorConfig, requestExtra) {
   if (!isObject(data) || isEmpty(data.type)) {
     return;
   }
@@ -23,7 +23,7 @@ export function buildAction(data, interceptorConfig) {
     return;
   }
 
-  return new action(data, interceptorConfig);
+  return new action(data, interceptorConfig, requestExtra);
 }
 export { BaseAction, DownloadAction, BlobAction, RedirectAction };
 //# sourceMappingURL=index.js.map

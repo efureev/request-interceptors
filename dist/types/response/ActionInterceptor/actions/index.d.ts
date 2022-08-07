@@ -6,9 +6,10 @@ import type { RawDataType } from './BaseAction';
 import BaseAction from './BaseAction';
 import { ActionInterceptorConfig } from '../ActionInterceptor';
 import { Nullable } from '../../../global';
+import { ExtraProperties } from '@feugene/layer-request';
 export { globalActionManager };
 export declare function buildAction(data: RawDataType & {
     private: boolean;
-}, interceptorConfig: ActionInterceptorConfig): Nullable<BaseAction>;
+}, interceptorConfig: ActionInterceptorConfig, requestExtra: ExtraProperties): Nullable<BaseAction>;
 export { BaseAction, DownloadAction, BlobAction, RedirectAction };
 //# sourceMappingURL=index.d.ts.map

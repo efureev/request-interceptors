@@ -40,12 +40,12 @@ var RedirectAction = /*#__PURE__*/function (_BaseAction) {
 
   var _super = _createSuper(RedirectAction);
 
-  function RedirectAction(data, interceptorConfig) {
+  function RedirectAction(data, interceptorConfig, requestExtra) {
     var _this;
 
     _classCallCheck(this, RedirectAction);
 
-    _this = _super.call(this, data, interceptorConfig);
+    _this = _super.call(this, data, interceptorConfig, requestExtra);
 
     _defineProperty(_assertThisInitialized(_this), "target", '_self');
 
