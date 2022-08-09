@@ -21,6 +21,12 @@ Object.defineProperty(exports, "DownloadAction", {
     return _DownloadAction.default;
   }
 });
+Object.defineProperty(exports, "ErrorAction", {
+  enumerable: true,
+  get: function get() {
+    return _ErrorAction.default;
+  }
+});
 Object.defineProperty(exports, "RedirectAction", {
   enumerable: true,
   get: function get() {
@@ -42,6 +48,8 @@ var _DownloadAction = _interopRequireDefault(require("./DownloadAction"));
 var _BlobAction = _interopRequireDefault(require("./BlobAction"));
 
 var _RedirectAction = _interopRequireDefault(require("./RedirectAction"));
+
+var _ErrorAction = _interopRequireDefault(require("./ErrorAction"));
 
 var _ActionsManager = _interopRequireDefault(require("./ActionsManager"));
 

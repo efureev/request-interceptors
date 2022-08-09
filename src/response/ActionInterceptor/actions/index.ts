@@ -2,6 +2,7 @@ import { isEmpty, isObject } from '@feugene/mu'
 import DownloadAction from './DownloadAction'
 import BlobAction from './BlobAction'
 import RedirectAction from './RedirectAction'
+import ErrorAction from './ErrorAction'
 import globalActionManager from './ActionsManager'
 import type { RawDataType } from './BaseAction'
 import BaseAction from './BaseAction'
@@ -37,4 +38,4 @@ export function buildAction(
 }
 
 
-export { BaseAction, DownloadAction, BlobAction, RedirectAction }
+export { BaseAction, DownloadAction, BlobAction, RedirectAction, ErrorAction }

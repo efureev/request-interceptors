@@ -2,6 +2,7 @@ import { isEmpty, isObject } from '@feugene/mu';
 import DownloadAction from './DownloadAction';
 import BlobAction from './BlobAction';
 import RedirectAction from './RedirectAction';
+import ErrorAction from './ErrorAction';
 import globalActionManager from './ActionsManager';
 import BaseAction from './BaseAction';
 globalActionManager.add('download', DownloadAction);
@@ -25,5 +26,5 @@ export function buildAction(data, interceptorConfig, requestExtra) {
 
   return new action(data, interceptorConfig, requestExtra);
 }
-export { BaseAction, DownloadAction, BlobAction, RedirectAction };
+export { BaseAction, DownloadAction, BlobAction, RedirectAction, ErrorAction };
 //# sourceMappingURL=index.js.map
