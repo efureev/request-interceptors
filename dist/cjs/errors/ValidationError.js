@@ -35,33 +35,24 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 var ValidationError = /*#__PURE__*/function (_HttpError) {
   _inherits(ValidationError, _HttpError);
 
   var _super = _createSuper(ValidationError);
 
   function ValidationError() {
-    var _this;
-
     _classCallCheck(this, ValidationError);
 
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = _super.call.apply(_super, [this].concat(args));
-
-    _defineProperty(_assertThisInitialized(_this), "messageErrors", []);
-
-    return _this;
+    return _super.apply(this, arguments);
   }
 
   _createClass(ValidationError, [{
     key: "setMessage",
-    value: function setMessage(message) {
+    value: // @ts-ignore
+    function setMessage(message) {
       var _this$response, _this$response$data;
+
+      this.messageErrors = [];
 
       _get(_getPrototypeOf(ValidationError.prototype), "setMessage", this).call(this, message);
 

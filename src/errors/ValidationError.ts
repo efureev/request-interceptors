@@ -1,9 +1,11 @@
 import HttpError from './HttpError'
 
 export default class ValidationError extends HttpError {
-  public messageErrors: string[] = []
+  // @ts-ignore
+  public messageErrors: string[]
 
   protected setMessage(message?: string): void {
+    this.messageErrors = []
     super.setMessage(message)
 
     const errors = this.response?.data?.errors
