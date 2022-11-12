@@ -30,11 +30,13 @@ describe('create Request with interceptors', () => {
 
     const axiosRequest = layerRequest.useConfig('api')
 
+    // @ts-ignore
     axiosRequest.$layerRequest.selectedConfig.axiosRequestConfig.runRequestInterceptors = []
 
+    // @ts-ignore
     assert.strictEqual(3, axiosRequest.interceptors.request.handlers.length)
 
-    const response = await axiosRequest.get('users/2')
+    const response: any = await axiosRequest.get('users/2')
       .catch(err => {
         console.log('err >>  ', err)
       })
@@ -44,6 +46,7 @@ describe('create Request with interceptors', () => {
     assert.strictEqual(true, isObject(response.config))
 
     forEach(['RequestConsoleInterceptor', 'RequestConsoleInterceptor 2', 'RequestConsoleInterceptor 3'], v => {
+      // @ts-ignore
       assert.strictEqual(true, axiosRequest.$layerRequest.selectedConfig.axiosRequestConfig.runRequestInterceptors.includes(v))
     })
   })

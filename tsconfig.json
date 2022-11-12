@@ -1,25 +1,30 @@
 {
   "compilerOptions": {
     // Target latest version of ECMAScript.
-    "target": "esnext",
-    // Specify module code generation: 'commonjs', 'amd', 'system', 'umd' or 'es2015'.
-    "module": "commonjs",
-    "lib": [
-      "es6",
-      "dom"
-    ],
+    "module": "esnext",
+    "target": "es2020",
+    //    "lib": [
+    //      "es6",
+    //      "dom"
+    //    ],
+    //    "rootDir": "src",
+//        "lib": [
+//          "esnext",
+//          "dom"
+//        ],
     /* Redirect output structure to the directory. */
-    "outDir": "dist/types",
+    //    "outDir": "dist/types",
     /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */
-    "rootDir": "src",
+    //    "rootDir": ".",
     /* Generates corresponding '.d.ts' file. */
-    "declaration": true,
-    "declarationMap": true,
-    "emitDeclarationOnly": true,
+    //    "declaration": true,
+    //    "declarationMap": true,
+    //    "emitDeclarationOnly": true,
     // Search under node_modules for non-relative imports.
-    //    "moduleResolution": "node",
+    "moduleResolution": "node",
     // Process & infer types from .js files.
     //    "allowJs": true,
+    "baseUrl": "./",
     "pretty": true,
     // Enable strictest settings like strictNullChecks & noImplicitAny.
     "strict": true,
@@ -32,8 +37,9 @@
     //    "resolveJsonModule": true
     "types": [
       "axios",
+      "@types/jest",
       "node",
-      "@feugene/mu"
+//      "@feugene/mu"
     ]
   },
   "include": [
@@ -41,6 +47,7 @@
   ],
   "exclude": [
     "dist",
-    "node_modules"
+    "node_modules",
+    "tests"
   ]
 }

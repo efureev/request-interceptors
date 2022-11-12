@@ -17,6 +17,7 @@ describe('create Request with interceptoprs', () => {
         timeout: 30000,
       },
       interceptors: {
+        // @ts-ignore
         response: [WrapperInterceptor()],
       },
     }))
@@ -29,6 +30,7 @@ describe('create Request with interceptoprs', () => {
     assert.strictEqual(1, l.interceptors.response.length)
 
     const buildReq = layerRequest.useConfig('api')
+    // @ts-ignore
     assert.strictEqual(1, buildReq.interceptors.response.handlers.length)
 
     const response: ResponseWrapper = <ResponseWrapper>await buildReq.get<any, ResponseWrapper>('v1/users')
@@ -38,6 +40,7 @@ describe('create Request with interceptoprs', () => {
       })
 
     assert.strictEqual(true, response instanceof ResponseWrapper)
+    // @ts-ignore
     assert.strictEqual('data', response.config.dataKey)
     assert.strictEqual('collection', response.getDataType())
 
@@ -52,6 +55,7 @@ describe('create Request with interceptoprs', () => {
       })
 
     assert.strictEqual(true, response2 instanceof ResponseWrapper)
+    // @ts-ignore
     assert.strictEqual('', response2.config.dataKey)
     assert.strictEqual('entity', response2.getDataType())
 
@@ -67,6 +71,7 @@ describe('create Request with interceptoprs', () => {
       })
 
     assert.strictEqual(true, response3 instanceof ResponseWrapper)
+    // @ts-ignore
     assert.strictEqual('data', response3.config.dataKey)
     assert.strictEqual('entity', response3.getDataType())
     assert.strictEqual(true, isObject(response3.data()))
@@ -80,6 +85,7 @@ describe('create Request with interceptoprs', () => {
       })
 
     assert.strictEqual(true, responseUuid instanceof ResponseWrapper)
+    // @ts-ignore
     assert.strictEqual('data', responseUuid.config.dataKey)
     assert.strictEqual('entity', responseUuid.getDataType())
     assert.strictEqual('bf48b829-1d3b-4443-a4fc-269935de2748', responseUuid.data('id'))

@@ -1,34 +1,22 @@
 "use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var _exportNames = {
-  ActionInterceptor: true
-};
-Object.defineProperty(exports, "ActionInterceptor", {
-  enumerable: true,
-  get: function get() {
-    return _ActionInterceptor.ActionInterceptor;
-  }
-});
-exports.default = void 0;
-
-var _ActionInterceptor = require("./ActionInterceptor");
-
-var _actions = require("./actions");
-
-Object.keys(_actions).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  if (key in exports && exports[key] === _actions[key]) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _actions[key];
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
     }
-  });
-});
-var _default = _ActionInterceptor.ActionInterceptor;
-exports.default = _default;
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ActionInterceptor = void 0;
+const ActionInterceptor_1 = require("./ActionInterceptor");
+Object.defineProperty(exports, "ActionInterceptor", { enumerable: true, get: function () { return ActionInterceptor_1.ActionInterceptor; } });
+__exportStar(require("./actions"), exports);
+exports.default = ActionInterceptor_1.ActionInterceptor;
 //# sourceMappingURL=index.js.map

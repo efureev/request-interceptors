@@ -1,79 +1,30 @@
 "use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var _exportNames = {
-  AuthInterceptor: true,
-  ConsoleLogRequestInterceptor: true,
-  ConsoleLogResponseInterceptor: true
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
-Object.defineProperty(exports, "AuthInterceptor", {
-  enumerable: true,
-  get: function get() {
-    return _AuthInterceptor.default;
-  }
-});
-Object.defineProperty(exports, "ConsoleLogRequestInterceptor", {
-  enumerable: true,
-  get: function get() {
-    return _ConsoleLogRequestInterceptor.default;
-  }
-});
-Object.defineProperty(exports, "ConsoleLogResponseInterceptor", {
-  enumerable: true,
-  get: function get() {
-    return _ConsoleLogResponseInterceptor.default;
-  }
-});
-
-var _AuthInterceptor = _interopRequireDefault(require("./request/AuthInterceptor"));
-
-var _ConsoleLogRequestInterceptor = _interopRequireDefault(require("./request/ConsoleLogRequestInterceptor"));
-
-var _ConsoleLogResponseInterceptor = _interopRequireDefault(require("./response/ConsoleLogResponseInterceptor"));
-
-var _errors = require("./errors");
-
-Object.keys(_errors).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  if (key in exports && exports[key] === _errors[key]) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _errors[key];
-    }
-  });
-});
-
-var _WrapperInterceptor = require("./response/WrapperInterceptor");
-
-Object.keys(_WrapperInterceptor).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  if (key in exports && exports[key] === _WrapperInterceptor[key]) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _WrapperInterceptor[key];
-    }
-  });
-});
-
-var _ActionInterceptor = require("./response/ActionInterceptor");
-
-Object.keys(_ActionInterceptor).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
-  if (key in exports && exports[key] === _ActionInterceptor[key]) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _ActionInterceptor[key];
-    }
-  });
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ConsoleLogResponseInterceptor = exports.ConsoleLogRequestInterceptor = exports.AuthInterceptor = void 0;
+const AuthInterceptor_1 = __importDefault(require("./request/AuthInterceptor"));
+exports.AuthInterceptor = AuthInterceptor_1.default;
+const ConsoleLogRequestInterceptor_1 = __importDefault(require("./request/ConsoleLogRequestInterceptor"));
+exports.ConsoleLogRequestInterceptor = ConsoleLogRequestInterceptor_1.default;
+const ConsoleLogResponseInterceptor_1 = __importDefault(require("./response/ConsoleLogResponseInterceptor"));
+exports.ConsoleLogResponseInterceptor = ConsoleLogResponseInterceptor_1.default;
+__exportStar(require("./errors"), exports);
+__exportStar(require("./response/WrapperInterceptor"), exports);
+__exportStar(require("./response/ActionInterceptor"), exports);
 //# sourceMappingURL=index.js.map

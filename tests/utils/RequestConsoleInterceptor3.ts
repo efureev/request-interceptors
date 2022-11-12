@@ -3,7 +3,7 @@ import type { AxiosRequestConfig } from 'axios'
 
 const RequestConsoleInterceptor3 = (options: LayerConfig, extra: ExtraProperties): InterceptorSuccessParam<AxiosRequestConfig> =>
   (config: AxiosRequestConfig): AxiosRequestConfig => {
-
+    // @ts-ignore
     options.axiosRequestConfig.runRequestInterceptors.push('RequestConsoleInterceptor 3')
 
     console.log('run RequestConsoleInterceptor 3')

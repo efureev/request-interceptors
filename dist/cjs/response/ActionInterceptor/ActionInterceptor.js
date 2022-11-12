@@ -1,83 +1,55 @@
 "use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.ActionInterceptor = void 0;
-
-var _actions = require("./actions");
-
-var _ResponseWrapper = _interopRequireDefault(require("../WrapperInterceptor/ResponseWrapper"));
-
-var _WrapperInterceptor = require("../WrapperInterceptor/WrapperInterceptor");
-
-var _OnlyOneActionError = _interopRequireDefault(require("./actions/OnlyOneActionError"));
-
-var _HttpError = _interopRequireDefault(require("../../errors/HttpError"));
-
-var _errors = require("../../errors");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var defaultConfig = {
-  actionAttributeName: 'status'
+const actions_1 = require("./actions");
+const ResponseWrapper_1 = __importDefault(require("../WrapperInterceptor/ResponseWrapper"));
+const WrapperInterceptor_1 = require("../WrapperInterceptor/WrapperInterceptor");
+const OnlyOneActionError_1 = __importDefault(require("./actions/OnlyOneActionError"));
+const HttpError_1 = __importDefault(require("../../errors/HttpError"));
+const errors_1 = require("../../errors");
+const defaultConfig = {
+    actionAttributeName: 'status',
 };
-
-var errHandler = function errHandler(interceptorConfig, configLayer, requestExtra) {
-  return function (error) {
-    if ((0, _errors.isNativeError)(error)) {
-      return Promise.reject(error);
+const errHandler = (interceptorConfig, configLayer, requestExtra) => (error) => {
+    if ((0, errors_1.isNativeError)(error)) {
+        return Promise.reject(error);
     }
-
-    var e = error instanceof _HttpError.default ? error : (0, _errors.makeHttpError)(error);
-
+    const e = error instanceof HttpError_1.default ? error : (0, errors_1.makeHttpError)(error);
     if (e.data && e.data[interceptorConfig.actionAttributeName]) {
-      var action = (0, _actions.buildAction)(e.data[interceptorConfig.actionAttributeName], interceptorConfig, requestExtra);
-
-      if (action && e.response) {
-        action.run(configLayer, e.response);
-
-        if (configLayer.getExtra('onlyOneAction')) {
-          throw new _OnlyOneActionError.default(e.response);
+        const action = (0, actions_1.buildAction)(e.data[interceptorConfig.actionAttributeName], interceptorConfig, requestExtra);
+        if (action && e.response) {
+            action.run(configLayer, e.response);
+            if (configLayer.getExtra('onlyOneAction')) {
+                throw new OnlyOneActionError_1.default(e.response);
+            }
         }
-      }
     }
-
     return Promise.reject(e);
-  };
 };
-
-var successHandler = function successHandler(interceptorConfig, configLayer, requestExtra) {
-  return function (response) {
-    if (!(response instanceof _ResponseWrapper.default)) {
-      response = (0, _WrapperInterceptor.createResponseWrapper)(response, configLayer);
+const successHandler = (interceptorConfig, configLayer, requestExtra) => (response) => {
+    if (!(response instanceof ResponseWrapper_1.default)) {
+        response = (0, WrapperInterceptor_1.createResponseWrapper)(response, configLayer);
     }
-
-    var rawData = !response.isBinary() ? response.response.data[interceptorConfig.actionAttributeName] : {
-      type: 'blob'
-    };
-    var action = (0, _actions.buildAction)(rawData, interceptorConfig, requestExtra);
-
+    const rawData = !response.isBinary()
+        ? response.response.data[interceptorConfig.actionAttributeName]
+        : { type: 'blob' };
+    const action = (0, actions_1.buildAction)(rawData, interceptorConfig, requestExtra);
     if (action) {
-      // @ts-ignore
-      response.action = action;
-      action.run(configLayer, response);
-
-      if (configLayer.getExtra('onlyOneAction')) {
-        throw new _OnlyOneActionError.default(response.response);
-      }
+        // @ts-ignore
+        response.action = action;
+        action.run(configLayer, response);
+        if (configLayer.getExtra('onlyOneAction')) {
+            throw new OnlyOneActionError_1.default(response.response);
+        }
     }
-
     return response;
-  };
 };
-
-var ActionInterceptor = function ActionInterceptor() {
-  var interceptorConfig = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultConfig;
-  return function (layerConfig, requestExtra) {
-    return [successHandler(interceptorConfig, layerConfig, requestExtra), errHandler(interceptorConfig, layerConfig, requestExtra)];
-  };
-};
-
+const ActionInterceptor = (interceptorConfig = defaultConfig) => (layerConfig, requestExtra) => [
+    successHandler(interceptorConfig, layerConfig, requestExtra),
+    errHandler(interceptorConfig, layerConfig, requestExtra),
+];
 exports.ActionInterceptor = ActionInterceptor;
 //# sourceMappingURL=ActionInterceptor.js.map
