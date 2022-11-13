@@ -6,8 +6,8 @@ import ErrorAction from './ErrorAction'
 import globalActionManager from './ActionsManager'
 import type { RawDataType } from './BaseAction'
 import BaseAction from './BaseAction'
-import { ActionInterceptorConfig } from '../ActionInterceptor'
-import { Nullable } from '../../../global'
+import { ActionInterceptorConfig } from '~/response/ActionInterceptor/Interceptor'
+import type { Nullable } from '~/global'
 import { ExtraProperties } from '@feugene/layer-request'
 
 globalActionManager.add('download', DownloadAction)

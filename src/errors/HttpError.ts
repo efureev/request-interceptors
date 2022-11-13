@@ -1,7 +1,7 @@
-import statusMessage from '../statuses'
+import statusMessage from '~/statuses'
 import { select } from '@feugene/mu'
 import type { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
-import type { Nullable } from '../global'
+import type { Nullable } from '~/global'
 
 /**
  * Create instant, which represent error object

@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const BaseAction_1 = __importDefault(require("./BaseAction"));
 const mu_1 = require("@feugene/mu");
-const ResponseWrapper_1 = __importDefault(require("../../WrapperInterceptor/ResponseWrapper"));
+const ResponseWrapper_1 = __importDefault(require("../../../response/WrapperInterceptor/ResponseWrapper"));
 const getFileName = (contentDisposition, value) => {
     if (value) {
         return value;

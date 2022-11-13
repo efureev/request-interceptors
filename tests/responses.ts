@@ -1,8 +1,8 @@
 import assert from 'assert'
 import type { LayerConfig } from '@feugene/layer-request'
 import { buildLayerRequest } from '@feugene/layer-request'
-import WrapperInterceptor from '../src/response/WrapperInterceptor'
-import ResponseWrapper from '../src/response/WrapperInterceptor/ResponseWrapper'
+import Interceptor from '~/response/WrapperInterceptor'
+import ResponseWrapper from '~/response/WrapperInterceptor/ResponseWrapper'
 import { isArray, isEmpty, isNull, isObject } from '@feugene/mu'
 
 describe('create Request with interceptoprs', () => {
@@ -18,7 +18,7 @@ describe('create Request with interceptoprs', () => {
       },
       interceptors: {
         // @ts-ignore
-        response: [WrapperInterceptor()],
+        response: [Interceptor()],
       },
     }))
 

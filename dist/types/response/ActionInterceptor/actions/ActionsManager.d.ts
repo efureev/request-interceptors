@@ -1,4 +1,4 @@
-import { Nullable } from '../../../global';
+import type { Nullable } from '../../../global';
 export declare class ActionsManager {
     private readonly list;
     constructor();

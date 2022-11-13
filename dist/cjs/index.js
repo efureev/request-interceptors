@@ -24,7 +24,7 @@ const ConsoleLogRequestInterceptor_1 = __importDefault(require("./request/Consol
 exports.ConsoleLogRequestInterceptor = ConsoleLogRequestInterceptor_1.default;
 const ConsoleLogResponseInterceptor_1 = __importDefault(require("./response/ConsoleLogResponseInterceptor"));
 exports.ConsoleLogResponseInterceptor = ConsoleLogResponseInterceptor_1.default;
-__exportStar(require("./errors"), exports);
-__exportStar(require("./response/WrapperInterceptor"), exports);
-__exportStar(require("./response/ActionInterceptor"), exports);
+__exportStar(require("./errors/index"), exports);
+__exportStar(require("./response/WrapperInterceptor/index"), exports);
+__exportStar(require("./response/ActionInterceptor/index"), exports);
 //# sourceMappingURL=index.js.map

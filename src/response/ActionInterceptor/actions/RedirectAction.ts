@@ -1,11 +1,11 @@
 import type { RawDataType } from './BaseAction'
 import BaseAction from './BaseAction'
 import ErrorAction from './ErrorAction'
-import type { ActionInterceptorConfig } from '../ActionInterceptor'
+import type { ActionInterceptorConfig } from '~/response/ActionInterceptor/Interceptor'
 import type { LayerConfig } from '@feugene/layer-request'
 import { ExtraProperties } from '@feugene/layer-request'
 import type { AxiosResponse } from 'axios'
-import type ResponseWrapper from '../../WrapperInterceptor/ResponseWrapper'
+import type ResponseWrapper from '~/response/WrapperInterceptor/ResponseWrapper'
 
 interface RedirectRawDataType extends RawDataType {
   url: string

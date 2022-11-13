@@ -15,8 +15,8 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ActionInterceptor = void 0;
-const ActionInterceptor_1 = require("./ActionInterceptor");
-Object.defineProperty(exports, "ActionInterceptor", { enumerable: true, get: function () { return ActionInterceptor_1.ActionInterceptor; } });
+const Interceptor_1 = require("./Interceptor");
+Object.defineProperty(exports, "ActionInterceptor", { enumerable: true, get: function () { return Interceptor_1.Interceptor; } });
 __exportStar(require("./actions"), exports);
-exports.default = ActionInterceptor_1.ActionInterceptor;
+exports.default = Interceptor_1.Interceptor;
 //# sourceMappingURL=index.js.map

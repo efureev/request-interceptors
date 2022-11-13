@@ -93,7 +93,7 @@ export const createRequest = (store, config) => {
             console.info(`\t✅ ${response.request.responseURL}`)
             return response
           },
-          WrapperInterceptor(),
+          Interceptor(),
           ActionInterceptorBuild({
             actionAttributeName: 'status',
           }),

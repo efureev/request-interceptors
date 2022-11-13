@@ -1,6 +1,6 @@
 import assert from 'assert'
-import globalActionManager, { ActionsManager } from '../src/response/ActionInterceptor/actions/ActionsManager'
-import BlobAction from '../src/response/ActionInterceptor/actions/BlobAction'
+import globalActionManager, { ActionsManager } from '~/response/ActionInterceptor/actions/ActionsManager'
+import BlobAction from '~/response/ActionInterceptor/actions/BlobAction'
 
 describe('create action manager', () => {
   it('empty instance', () => {

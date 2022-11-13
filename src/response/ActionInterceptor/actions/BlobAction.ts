@@ -2,7 +2,7 @@ import BaseAction from './BaseAction'
 import { b64ToUtf8Safe } from '@feugene/mu'
 import type { LayerConfig } from '@feugene/layer-request'
 import type { AxiosResponse } from 'axios'
-import ResponseWrapper from '../../WrapperInterceptor/ResponseWrapper'
+import ResponseWrapper from '~/response/WrapperInterceptor/ResponseWrapper'
 
 const getFileName = (contentDisposition?: string, value?: string): string => {
   if (value) {

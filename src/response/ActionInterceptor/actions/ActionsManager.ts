@@ -1,4 +1,4 @@
-import { Nullable } from '../../../global'
+import type { Nullable } from '~/global'
 
 export class ActionsManager {
   private readonly list: Map<string, Function>

@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     // Target latest version of ECMAScript.
-    "module": "esnext",
     "target": "es2020",
     //    "lib": [
     //      "es6",
@@ -12,6 +11,11 @@
 //          "esnext",
 //          "dom"
 //        ],
+    "paths": {
+      "~/*": [
+        "./src/*"
+      ]
+    },
     /* Redirect output structure to the directory. */
     //    "outDir": "dist/types",
     /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */

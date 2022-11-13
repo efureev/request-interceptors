@@ -1,7 +1,7 @@
-import type { ActionInterceptorConfig } from '../ActionInterceptor'
+import type { ActionInterceptorConfig } from '~/response/ActionInterceptor/Interceptor'
 import type { ExtraProperties, LayerConfig } from '@feugene/layer-request'
 import type { AxiosResponse } from 'axios'
-import type ResponseWrapper from '../../WrapperInterceptor/ResponseWrapper'
+import type ResponseWrapper from '~/response/WrapperInterceptor/ResponseWrapper'
 
 export interface RawDataType extends Record<PropertyKey, any> {
   type: string

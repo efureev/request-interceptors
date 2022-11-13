@@ -1,7 +1,7 @@
 import assert from 'assert'
-import { ActionsManager } from '../src/response/ActionInterceptor/actions/ActionsManager'
-import BlobAction from '../src/response/ActionInterceptor/actions/BlobAction'
-import { globalActionManager } from '../src/response/ActionInterceptor/actions'
+import { ActionsManager } from '~/response/ActionInterceptor/actions/ActionsManager'
+import BlobAction from '~/response/ActionInterceptor/actions/BlobAction'
+import { globalActionManager } from '~/response/ActionInterceptor/actions/index'
 
 describe('create action manager', () => {
   it('already filled instance', () => {

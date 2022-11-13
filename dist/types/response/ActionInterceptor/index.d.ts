@@ -1,4 +1,4 @@
-import { ActionInterceptor } from './ActionInterceptor';
+import { Interceptor as ActionInterceptor } from './Interceptor';
 export * from './actions';
 export default ActionInterceptor;
 export { ActionInterceptor };
