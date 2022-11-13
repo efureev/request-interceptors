@@ -17,6 +17,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ActionInterceptor = void 0;
 const Interceptor_1 = require("./Interceptor");
 Object.defineProperty(exports, "ActionInterceptor", { enumerable: true, get: function () { return Interceptor_1.Interceptor; } });
-__exportStar(require("./actions"), exports);
+__exportStar(require("./actions/index"), exports);
 exports.default = Interceptor_1.Interceptor;
 //# sourceMappingURL=index.js.map
