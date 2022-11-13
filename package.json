@@ -1,6 +1,6 @@
 {
   "name": "@feugene/request-interceptors",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Interceptors for axios",
   "keywords": [
     "request"
@@ -28,7 +28,7 @@
   ],
   "exports": {
     "types": "./dist/types/index.d.ts",
-    "import": "./dist/esm/index.js",
+    "import": "./dist/esm/index.mjs",
     "require": "./dist/cjs/index.js"
   },
   "engines": {

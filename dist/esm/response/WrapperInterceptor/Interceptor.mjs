@@ -1,4 +1,4 @@
-import { isNativeError, makeHttpError } from '~/errors.mjs';
+import { isNativeError, makeHttpError } from '../../errors/index.mjs';
 import ResponseWrapper from './ResponseWrapper.mjs';
 import { isFunction } from '@feugene/mu';
 const errHandler = (layerConfig) => (error) => {

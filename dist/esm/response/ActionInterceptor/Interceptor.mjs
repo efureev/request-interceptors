@@ -1,9 +1,9 @@
-import { buildAction } from './actions.mjs';
+import { buildAction } from './actions/index.mjs';
 import ResponseWrapper from '../../response/WrapperInterceptor/ResponseWrapper.mjs';
 import { createResponseWrapper } from '../../response/WrapperInterceptor/Interceptor.mjs';
 import OnlyOneActionError from './actions/OnlyOneActionError.mjs';
 import HttpError from '../../errors/HttpError.mjs';
-import { isNativeError, makeHttpError } from '~/errors.mjs';
+import { isNativeError, makeHttpError } from '../../errors/index.mjs';
 const defaultConfig = {
     actionAttributeName: 'status',
 };

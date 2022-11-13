@@ -1,11 +1,11 @@
 import type { AxiosError, AxiosResponse } from 'axios'
-import { buildAction } from './actions'
+import { buildAction } from './actions/index'
 import type { ExtraProperties, LayerConfig } from '@feugene/layer-request'
 import ResponseWrapper from '~/response/WrapperInterceptor/ResponseWrapper'
 import { createResponseWrapper } from '~/response/WrapperInterceptor/Interceptor'
 import OnlyOneActionError from './actions/OnlyOneActionError'
 import HttpError from '~/errors/HttpError'
-import { isNativeError, makeHttpError } from '~/errors'
+import { isNativeError, makeHttpError } from '~/errors/index'
 
 const defaultConfig: ActionInterceptorConfig = {
   actionAttributeName: 'status',

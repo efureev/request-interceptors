@@ -1,4 +1,4 @@
-import { isNativeError, makeHttpError } from '~/errors'
+import { isNativeError, makeHttpError } from '~/errors/index'
 import ResponseWrapper from './ResponseWrapper'
 import { isFunction } from '@feugene/mu'
 import type { ExtraProperties, InterceptorFn, InterceptorNormal, LayerConfig } from '@feugene/layer-request'
